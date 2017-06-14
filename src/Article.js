@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 export default class Article extends Component {
     constructor(props) {
@@ -10,12 +10,12 @@ export default class Article extends Component {
     }
 
     render() {
-        const {article} = this.props
-        const {isOpen} = this.state
+        const { article } = this.props
+        const { isOpen } = this.state
         return (
             <div>
                 <h3>{article.title}</h3>
-                <button onClick = {this.toggleOpen}>
+                <button onClick={this.toggleOpen}>
                     {isOpen ? 'close' : 'open'}
                 </button>
                 {this.getBody()}
@@ -25,7 +25,7 @@ export default class Article extends Component {
 
     getBody() {
         if (!this.state.isOpen) return null
-        const {article} = this.props
+        const { article } = this.props
         return <section>{article.text}</section>
     }
 
