@@ -6,8 +6,7 @@ export default class Article extends Component {
         super(props)
 
         this.state = {
-            isOpen: true,
-            isCommentsVisible: false
+            isOpen: true
         }
     }
 
@@ -33,10 +32,10 @@ export default class Article extends Component {
         return (
             <section>
                 <div>{article.text}</div>
-                {article.comments &&
-                    <CommentList isCommentsVisible={this.state.isCommentsVisible}
-                        toggleComments={this.toggleComments}
-                        comments={article.comments} />}
+                <CommentList
+                    toggleComments={this.toggleComments}
+                    comments={article.comments} 
+                />
             </section>
         )
     }
@@ -46,14 +45,6 @@ export default class Article extends Component {
 
         this.setState({
             isOpen: !this.state.isOpen
-        })
-    }
-
-    toggleComments = (ev) => {
-        ev.preventDefault()
-
-        this.setState({
-            isCommentsVisible: !this.state.isCommentsVisible
         })
     }
 }

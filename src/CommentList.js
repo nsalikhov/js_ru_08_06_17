@@ -1,13 +1,34 @@
-import React, { Component } from 'react'
+import React, { PropTypes, Component } from 'react'
 import Comment from './Comment'
 
-export default function CommentList({ isCommentsVisible, toggleComments, comments }) {
-    return (
-        <div>
-            <button onClick={toggleComments}>{isCommentsVisible ? 'hide comments' : 'show comments'}</button>
+export default class CommentList extends Component {
+    static defaultProps  = {
+        comments: []
+    }
 
-            {isCommentsVisible &&
-                <ul>{comments.map(x => <Comment key={x.id} {...x} />)}</ul>}
-        </div>
-    )
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            areCommentsVisible: true
+        }
+    }
+
+    render() {
+        return (
+            <div>
+                <button onClick={this.toggleComments}>{this.state.areCommentsVisible ? 'hide comments' : 'show comments'}</button>
+
+                {this.state.areCommentsVisible && <ul>{this.props.comments.map(x => <Comment key={x.id} {...x} />)}</ul>}
+            </div>
+        )
+    }
+
+    toggleComments = (ev) => {
+        ev.preventDefault()
+
+        this.setState({
+            areCommentsVisible: !this.state.areCommentsVisible
+        })
+    }    
 }
